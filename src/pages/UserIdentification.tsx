@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+    Alert,
     KeyboardAvoidingView,
     Platform,
     SafeAreaView,
@@ -15,6 +16,7 @@ import { Button } from '../Components/Button'
 import { useNavigation } from '@react-navigation/native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { Keyboard } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export function UserIdentification() {
     const [isFocused, setIsFocused] = useState(false);
@@ -38,8 +40,21 @@ export function UserIdentification() {
 
     const navigation = useNavigation();
 
-    function handleSubmit() {
-        navigation.navigate("Confirmation");
+    async function handleSubmit() {
+        if (!name)
+            return Alert.alert('Na moral, me diz teu nome... 😥');
+
+        try {
+
+            await AsyncStorage.setItem('@plantmanager.user', name);
+
+            navigation.navigate("Confirmation");
+
+
+        } catch {
+            Alert.alert('Não foi possível salvar seu nome. 😪')
+        }
+
     }
 
     return (
