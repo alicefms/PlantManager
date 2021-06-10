@@ -43,7 +43,8 @@ export function PlantSelect() {
         if (environment === 'all')
             return setFilteredPlants(plants);
 
-        const filtered = plants.filter(plant => plant.environments.includes(environment));
+        const filtered = plants.filter(plant =>
+            plant.environments.includes(environment));
         setFilteredPlants(filtered);
     }
 
@@ -85,8 +86,12 @@ export function PlantSelect() {
         async function fetchEnvironment() {
             const { data } = await api.get('plants_environments?_sort=title&_order=asc');
             setEnvironments([
-                { key: 'all', title: 'Todos' },
-                ...data]);
+                {
+                    key: 'all',
+                    title: 'Todos',
+                },
+                ...data
+            ]);
         }
 
         fetchEnvironment();

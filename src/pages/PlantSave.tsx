@@ -9,8 +9,6 @@ import {
     Image,
     Platform,
 
-
-
 } from 'react-native';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
 import { SvgCssUri } from 'react-native-svg';
@@ -20,7 +18,7 @@ import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 import DataTimePicker, { Event } from '@react-native-community/datetimepicker';
 import { format, isBefore } from 'date-fns';
-import { PlantProps, savePlant } from '../libs/storage';
+import { loadPlant, PlantProps, savePlant } from '../libs/storage';
 
 interface Params {
     plant: PlantProps
@@ -52,23 +50,25 @@ export function PlantSave() {
     }
 
     async function handleSave() {
+        const data = await loadPlant();
+        console.log(data);
 
-        try {
-            await savePlant({
-                ...plant,
-                dateTimeNotification: selectedDateTime
-            });
-
-            navigation.navigate('Confirmation', {
-                title: 'Tudo certo',
-                subtitle: 'Fique tranquilo que sempre vamos lembrar voce de cuidar da sua plantinha',
-                buttonTitle: 'Muito obrigada! ☺',
-                icon: 'hug',
-                nextScreen: 'MyPlants',
-            });
-
-        } catch { Alert.alert('Não foi possível salvar. 😢'); }
-
+        /*  try {
+              await savePlant({
+                  ...plant,
+                  dateTimeNotification: selectedDateTime
+              });
+  
+              navigation.navigate('Confirmation', {
+                  title: 'Tudo certo',
+                  subtitle: 'Fique tranquilo que sempre vamos lembrar voce de cuidar da sua plantinha',
+                  buttonTitle: 'Muito obrigada! ☺',
+                  icon: 'hug',
+                  nextScreen: 'MyPlants',
+              });
+  
+          } catch { Alert.alert('Não foi possível salvar. 😢'); }
+  */
     }
 
     return (

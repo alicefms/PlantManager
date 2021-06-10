@@ -48,7 +48,7 @@ export async function savePlant(plant: PlantProps): Promise<void> {
 }
 
 
-export async function loadPlant(): Promise<PlantProps[]> {
+export async function loadPlant(): Promise<StoragePlantProps> {
     try {
         const data = await AsyncStorage.getItem('@plantmanager:plants');
         const plants = data ? (JSON.parse(data) as StoragePlantProps) : {};
