@@ -50,25 +50,24 @@ export function PlantSave() {
     }
 
     async function handleSave() {
-        const data = await loadPlant();
-        console.log(data);
 
-        /*  try {
-              await savePlant({
-                  ...plant,
-                  dateTimeNotification: selectedDateTime
-              });
-  
-              navigation.navigate('Confirmation', {
-                  title: 'Tudo certo',
-                  subtitle: 'Fique tranquilo que sempre vamos lembrar voce de cuidar da sua plantinha',
-                  buttonTitle: 'Muito obrigada! ☺',
-                  icon: 'hug',
-                  nextScreen: 'MyPlants',
-              });
-  
-          } catch { Alert.alert('Não foi possível salvar. 😢'); }
-  */
+
+        try {
+            await savePlant({
+                ...plant,
+                dateTimeNotification: selectedDateTime
+            });
+
+            navigation.navigate('Confirmation', {
+                title: 'Tudo certo',
+                subtitle: 'Fique tranquilo que sempre vamos lembrar voce de cuidar da sua plantinha',
+                buttonTitle: 'Muito obrigada! ☺',
+                icon: 'hug',
+                nextScreen: 'MyPlants',
+            });
+
+        } catch { Alert.alert('Não foi possível salvar. 😢'); }
+
     }
 
     return (

@@ -66,7 +66,7 @@ export function MyPlants() {
                 <FlatList
                     data={myPlants}
                     keyExtractor={(item) => String(item.id)}
-                    renderItem={(item) => (
+                    renderItem={({ item }) => (
                         <PlantCardSecondary data={item} />
 
                     )}
